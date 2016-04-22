@@ -356,7 +356,7 @@ public class JsfApplicantPortletTest extends TesterBase {
 		firstNameField.click();
 		logger.log(Level.INFO,
 			"clearing the firstNameField using the BACKSPACE key, and then tabbing out of the firstNameField ...");
-		firstNameField.sendKeys(Keys.BACK_SPACE);
+		firstNameField.sendKeys(Keys.ARROW_RIGHT, Keys.BACK_SPACE);
 
 		logger.log(Level.INFO, "Waiting for the firstNameField to contain 'asd' ...");
 		try {
@@ -496,7 +496,7 @@ public class JsfApplicantPortletTest extends TesterBase {
 		emailAddressField.sendKeys(Keys.TAB);
 		phoneNumberField.click();
 
-		logger.log(Level.INFO, "Waiting for the emailAddressFieldError to contain 'test@liferay.com' ...");
+		logger.log(Level.INFO, "Waiting for the emailAddressField to contain 'test@liferay.com' ...");
 		try {
 			WebDriverWait wait = new WebDriverWait(browser, 10);
 			wait.until(ExpectedConditions.textToBePresentInElementValue(By.xpath(emailAddressFieldXpath), "test@liferay.com"));
@@ -513,7 +513,7 @@ public class JsfApplicantPortletTest extends TesterBase {
 		logger.log(Level.INFO, "Waiting for the emailAddressFieldError to disappear ...");
 		try {
 			WebDriverWait wait = new WebDriverWait(browser, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(emailAddressFieldErrorXpath)));
+			wait.until(ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(By.ByXPath.xpath(emailAddressFieldErrorXpath))));
 			logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
 		}
 		catch (Exception e) {
@@ -1122,16 +1122,16 @@ public class JsfApplicantPortletTest extends TesterBase {
 			}
 		}
 
-		logger.log(Level.INFO, "fileUploadChooser.getCssValue(transform) = " + fileUploadChooser.getCssValue("transform"));
-		logger.log(Level.INFO, "fileUploadChooser.getCssValue(visibility) = " + fileUploadChooser.getCssValue("visibility"));
-		logger.log(Level.INFO, "fileUploadChooser.getCssValue(display) = " + fileUploadChooser.getCssValue("display"));
-		logger.log(Level.INFO, "fileUploadChooser.getCssValue(display) = " + fileUploadChooser.getCssValue("display"));
-		logger.log(Level.INFO, "fileUploadChooser.getCssValue(opacity) = " + fileUploadChooser.getCssValue("opacity"));
-		logger.log(Level.INFO, "fileUploadChooser.getCssValue(height) = " + fileUploadChooser.getCssValue("height"));
-		logger.log(Level.INFO, "fileUploadChooser.getCssValue(width) = " + fileUploadChooser.getCssValue("width"));
-		logger.log(Level.INFO, "fileUploadChooser.getCssValue(overflow) = " + fileUploadChooser.getCssValue("overflow"));
-
-		logger.log(Level.INFO, "fileUploadChooser.getAttribute(type) = " + fileUploadChooser.getAttribute("type"));
+//		logger.log(Level.INFO, "fileUploadChooser.getCssValue(transform) = " + fileUploadChooser.getCssValue("transform"));
+//		logger.log(Level.INFO, "fileUploadChooser.getCssValue(visibility) = " + fileUploadChooser.getCssValue("visibility"));
+//		logger.log(Level.INFO, "fileUploadChooser.getCssValue(display) = " + fileUploadChooser.getCssValue("display"));
+//		logger.log(Level.INFO, "fileUploadChooser.getCssValue(display) = " + fileUploadChooser.getCssValue("display"));
+//		logger.log(Level.INFO, "fileUploadChooser.getCssValue(opacity) = " + fileUploadChooser.getCssValue("opacity"));
+//		logger.log(Level.INFO, "fileUploadChooser.getCssValue(height) = " + fileUploadChooser.getCssValue("height"));
+//		logger.log(Level.INFO, "fileUploadChooser.getCssValue(width) = " + fileUploadChooser.getCssValue("width"));
+//		logger.log(Level.INFO, "fileUploadChooser.getCssValue(overflow) = " + fileUploadChooser.getCssValue("overflow"));
+//
+//		logger.log(Level.INFO, "fileUploadChooser.getAttribute(type) = " + fileUploadChooser.getAttribute("type"));
 
 		logger.log(Level.INFO, "entering in " + getPathToJerseyFile() + " for fileUploadChooser ...");
 
@@ -1378,6 +1378,7 @@ public class JsfApplicantPortletTest extends TesterBase {
 			assertTrue("formTag should contain 'Dear '," +
 			" but " + formTagXpath + " does not contain 'Dear '.", false);
 		}
+		browser.quit();
 	}
 }
 //J+
