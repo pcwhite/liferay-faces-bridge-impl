@@ -513,7 +513,14 @@ public class JsfApplicantPortletTest extends TesterBase {
 		logger.log(Level.INFO, "Waiting for the emailAddressFieldError to disappear ...");
 		try {
 			WebDriverWait wait = new WebDriverWait(browser, 10);
-			wait.until(ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(By.ByXPath.xpath(emailAddressFieldErrorXpath))));
+
+			if("PrimefacesApplicantPortletTest".equals(getClass().getSimpleName())) {
+				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(emailAddressFieldErrorXpath)));
+			}
+			else {
+				wait.until(ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(emailAddressFieldErrorXpath))));
+			}
+
 			logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
 		}
 		catch (Exception e) {
@@ -1067,7 +1074,14 @@ public class JsfApplicantPortletTest extends TesterBase {
 		logger.log(Level.INFO, "Waiting for the dateOfBirthFieldError to disappear ...");
 		try {
 			WebDriverWait wait = new WebDriverWait(browser, 10);
-			wait.until(ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(By.ByXPath.xpath(dateOfBirthFieldErrorXpath))));
+
+			if("PrimefacesApplicantPortletTest".equals(getClass().getSimpleName())) {
+				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(dateOfBirthFieldErrorXpath)));
+			}
+			else {
+				wait.until(ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(dateOfBirthFieldErrorXpath))));
+			}
+
 		}
 		catch (Exception e) {
 			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
@@ -1308,6 +1322,22 @@ public class JsfApplicantPortletTest extends TesterBase {
 		logger.log(Level.INFO, "emailAddressField.getAttribute('value') = " + emailAddressField.getAttribute("value"));
 		assertTrue("emailAddressField is empty after clearing and clicking into another field",
 			"".equals(emailAddressField.getAttribute("value")));
+
+		try {
+			WebDriverWait wait = new WebDriverWait(browser, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(firstNameFieldXpath)));
+			logger.log(Level.INFO, "isThere(browser, firstNameFieldXpath) = " + isThere(browser, firstNameFieldXpath));
+		}
+		catch (Exception e) {
+			logger.log(Level.INFO, "Exception e.getMessage() = " + e.getMessage());
+			boolean firstNameFieldIsThere = isThere(browser, firstNameFieldXpath);
+			logger.log(Level.INFO, "firstNameFieldIsThere = " + firstNameFieldIsThere);
+			if (firstNameFieldIsThere) {
+				foo = firstNameField.getAttribute("value");
+			}
+			assertTrue("firstNameField should be correct after entering 'David'," +
+			" but " + firstNameFieldXpath + " contains '" + foo + "'.", false);
+		}
 
 		logger.log(Level.INFO, "entering data ...");
 		firstNameField.sendKeys("David");

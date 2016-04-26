@@ -76,7 +76,7 @@ public class PrimefacesApplicant extends TesterBase {
 	private static final String hideCommentsLinkXpath = "//a[contains(text(),'Hide Comments')]";
 	private static final String commentsXpath = "//textarea[contains(@id,':comments')]";
 
-	private static final String fileUploadChooserXpath = "//input[@type='file' and @multiple='multiple']";
+	private static final String fileUploadChooserXpath = "//input[@type='file']";
 	private static final String submitFileXpath = "//span[contains(text(),'Upload')]";
 	private static final String uploadedFileXpath = "//tr[@class='ui-widget-content ui-datatable-even']/td[2]";
 
